@@ -1,0 +1,13 @@
+Get Coincombinations(input) sets the goal of amount of change to return
+If change is in pennies, show how many. 1cent = 1 penny.
+5 cents = 5 pennies.
+5 cents will be a nickel.
+10 cents will be one dime.
+25 cents will be one quarter. 
+Post Output of number of quarters, number of dimes, number of nickels, number of pennies.
+we get the amount of cents needed to make change.
+extract numbers 1-4, 6-9 to eliminate pennies.
+
+  if i / 25 % 0 ==> subtract $0.25
+  if i / 10 % 0 ==> subtract $0.10
+any number between *1-4 has to include pennies
