@@ -1,20 +1,26 @@
 using System;
+using System.Collections.Generic;
 
 namespace Narwhals
 {
   public class Allergy
   {
     private int _allgy;
-    private static int _total;
-    public Allergy(int allgy, int total)
+    private static List<string> _allgys = new List<string>() {};
+    private static Dictionary<string, int> _allgyScore = new Dictionary<string, int>() {
+      {"eggs", 1},
+      {"peanuts", 2},
+      {"shellfish", 4},
+      {"strawberries", 8},
+      {"tomatoes", 16},
+      {"chocolate", 32},
+      {"pollen", 64},
+      {"cats", 128},
+    };
+    public Allergy(int allgy)
+
     {
       _allgy = allgy;
-      _total = total;
-    }
-
-    public int GetTotal()
-    {
-      return _total;
     }
     public int GetAllgy()
     {
@@ -24,22 +30,45 @@ namespace Narwhals
     {
       _allgy = allgy;
     }
-
-    public static void SetTotal(int total)
+    public static List<string> GetAllgys()
     {
-      _total = total;
+      return _allgys;
     }
-    public static void AddToTotal(int allgy)
+    public static void SetAllgys(List<string> allgys)
     {
-      _total = _total + allgy;
+      _allgys = allgys;
     }
-
-    public void AllgySuperdoom()
+    public static Dictionary<string, int> GetScores()
     {
-      int allgy = this.GetAllgy();
-      string[] AllgyArray = new string[] { "eggs", "peanuts", "shellfish", "tomatoes", "chocolate", "pollen", "cats" };
-      int[] FinalArray = new int[] { 1, 2, 4, 8 , 16, 32, 64, 128 };
-      Allergy.AddToTotal(FinalArray[allgy]);
+      return _allgyScore;
+    }
+    // public static List<string> SelectedValuesAsStrings(this CheckBoxList thatCheckBoxList )
+    // {
+    //   List<string> selectedValuesAsStrings = thatCheckBoxList.Items
+    //                   .Cast<ListItem>()
+    //                   .Where( i => i.Selected )
+    //                   .Select( i => i.Value )
+    //                   .ToList();
+    //
+    //   return selectedValuesAsStrings;
+    // }
+
+    public Allergy AllgySuperdoom(int userAllgy)
+    {
+      this.SetAllgy(userAllgy);
+      Dictionary<string, int> allgyScore = Allergy.GetScores();
+      List<string> allgys = new List<string>();
+      foreach (KeyValuePair<string, int> allgy in allgyScore)
+      {
+        if (allgy.Value <= this.GetAllgy())
+        {
+          allgys.Add(allgy.Key);
+          Console.WriteLine(allgy.Key);
+        }
+      }
+      Allergy.SetAllgys(allgys);
+
+      return this;
     }
   }
 }
