@@ -1,9 +1,9 @@
 using Nancy;
-using CoineyCoins.Objects;
+using Narwhals;
 using System;
 using System.Collections.Generic;
 
-namespace CoinReturner
+namespace Allergies
 {
   public class HomeModule : NancyModule
     {
@@ -12,12 +12,11 @@ namespace CoinReturner
         Get["/"] = _ => {
           return View["index.cshtml"];
         };
-        Post["/feed_coiney"] =_=>{
-            Coiney newCoiney = new Coiney();
-            decimal[] change = newCoiney.CoinsReturned(Request.Form["coin-return"]);
-            return View["final_result.cshtml", change];
+        Post["/panicmode"] =_=>{
+          Allergy newAllergy = new Allergy(Request.Form["doom"], 0);
+          newAllergy.AllgySuperdoom();
+          return View["DDay.cshtml", newAllergy];
         };
-
       }
     }
   }
